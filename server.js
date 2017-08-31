@@ -1,20 +1,20 @@
 const express = require('express')
-const uuidv4 = require('uuid/v4')
 const bodyParser = require('body-parser')
+const uuidv4 = require('uuid/v4')
 const basicAuth = require('express-basic-auth')
 
 const app = express()
+let id=1;
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 const newPosts = [
   {
-    id: uuidv4(),
-    title: 'sample post'
-  }
-]
-const newComments = [
-  {
-    id: uuidv4(),
-    title: 'sample comment'
+    id:id,
+    // number: id,
+    title: 'sample post',
+    comments: 'sample',
+    // newpost: [],
+    date: '2017/08/09',
+    profile : '익명'
   }
 ]
 
@@ -28,41 +28,69 @@ app.use(basicAuth({
   realm : 'Imb4T3st4pp'
 }))
 
+
+
 // 익명게시판 목록 페이지
 app.get('/', (req, res) => {
   res.render('index.ejs', {newPosts})
 })
 
+
+
 // 익명게시판 viewDetail 페이지
 app.get('/viewpost/:id', (req, res) => {
   const viewpost = newPosts.find(t => t.id === req.params.id)
-  if (viewpost) {
-    res.render('viewpost.ejs', {viewpost})  
-  } else {
-    res.status(404)
-    res.send('404 Not Found')
-  }
+  res.render('viewpost.ejs', {newPosts})
+  // if (viewpost) {
+  // } else {
+  //   res.status(404)
+  //   res.send('404 Not Found')
+  // }
+})
+
+
+// 익명게시판 newPost 페이지
+app.get('/newpost', (req, res) => {
+  res.render('insert.ejs')
 })
 
 
 // 새글 추가 endpoint
-app.post('/new', urlencodedParser, (req, res) => {
+app.post('/newpost', urlencodedParser, (req, res) => {
   const title = req.body.title
+  const text = req.body.text
   // validation
-  if (title) {
+  if (title, text) {
     const newpost = {
-      id: uuidv4(),
-      title
+      id: ++id,
+      title,
+      text
     }
     newPosts.push(newpost)
-    // res.render('index.ejs', {todos}) // 이렇게 하면 안 됩니다!
-    // res.redirect(301, '/') // 이렇게 해도 안 됩니다!
+    // id++
     res.redirect('/') // res.redirect는 302 상태코드로 응답합니다.
   } else {
     res.status(400)
     res.send('400 Bad Request')
   }
 })
+
+// 새 댓글 추가 endpoint
+app.post('/comment', urlencodedParser, (req, res) => {
+  const comment = req.body.comment
+  if (comment) {
+    // const newcomment = {
+    //   id: uuidv4(),
+    //   comment
+    // }
+    newPosts.unshift(comment)
+    res.redirect('/viewpost/:id')
+  } else {
+    res.status(400)
+    res.send('400 Bad Request')
+  }
+})
+
 
 // 글 삭제 endpoint
 app.post('/newpost/:id/delete', (req,res)=> {

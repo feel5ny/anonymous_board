@@ -32,6 +32,7 @@ input[type="submit"] {
   float:left;
   position: relative;
   display: inline;
+  cursor: pointer;
 }
 
 .deleteBtn {

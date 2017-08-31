@@ -11,7 +11,8 @@
 <body>
   <div class="wrapper">
     <h1>익명게시판</h1>
-    <input type="submit" value="새글 작성하기" class="newpost">
+    <a href="/newpost">
+    <input type="submit" value="새글 작성하기" class="newpost"></a>
 
     <table class="ui very basic table">
       <thead>
@@ -22,17 +23,17 @@
           <th class="two wide">날짜</th>
           <th class="one wide">작성자</th>
         </tr>
-      </thead>
+      </thead>  
       <tbody>
-        <tr>
-          <td>1</td>
           <% newPosts.forEach(viewpost => { %>
+        <tr>
+          <td><%= viewpost.id %></td>
           <td><a href="/viewpost/<%= viewpost.id %>"><%= viewpost.title %></a></td>
-          <td>None</td>
-          <td>None</td>
-          <td>None</td>
-          <% }) %>
+          <td>1</td>
+          <td><%= viewpost.date %></td>
+          <td><%= viewpost.profile %></td>
         </tr>
+          <% }) %>
       </tbody>
     </table>
   </div>
