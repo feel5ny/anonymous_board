@@ -2,6 +2,9 @@ body {
   background-color: lightcoral;
 }
 
+a{
+  color : black;
+}
 h1 {
   text-align: center;
   margin-bottom: 50px;
@@ -13,20 +16,59 @@ h1 {
   margin : 0 auto;
 }
 
+
 input[type="submit"] {
-  width: 200px;
-  left: 50%;
-  transform: translateX(-50%);
   color: white;
-  background-color: blueviolet;
   border: none;
   border-radius: 30px;
   padding: 10px;
+}
+
+.newpost {
+  width: 200px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: blueviolet;
   float:left;
   position: relative;
   display: inline;
 }
 
+.deleteBtn {
+  width: 100px;
+  background-color: blue;
+  right: 0;
+  position: absolute;
+}
+
 table{
   padding-top : 30px;
+}
+
+.commentBtn{
+  width : 19%;
+  background-color: blueviolet;
+}
+
+.commentForm{
+  border: none;
+  border: 1px solid lightgray;
+  border-radius: 20px;
+  padding: 10px 10px 10px 20px;
+  /* padding-right: 20px; */
+  outline-style: none;
+  width: 80%;
+}
+
+.commentForm:focus{
+  border: 1px solid blueviolet;
+}
+
+.commentList{
+  border-bottom: 1px solid lightgray;
+}
+
+.commentBox{
+  margin-top: 20px;
+  padding: 10px;
 }

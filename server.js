@@ -11,6 +11,12 @@ const newPosts = [
     title: 'sample post'
   }
 ]
+const newComments = [
+  {
+    id: uuidv4(),
+    title: 'sample comment'
+  }
+]
 
 app.set('view engine', 'ejs')	
 app.use('/static', express.static('public'))
@@ -27,6 +33,18 @@ app.get('/', (req, res) => {
   res.render('index.ejs', {newPosts})
 })
 
+// 익명게시판 viewDetail 페이지
+app.get('/viewpost/:id', (req, res) => {
+  const viewpost = newPosts.find(t => t.id === req.params.id)
+  if (viewpost) {
+    res.render('viewpost.ejs', {viewpost})  
+  } else {
+    res.status(404)
+    res.send('404 Not Found')
+  }
+})
+
+
 // 새글 추가 endpoint
 app.post('/new', urlencodedParser, (req, res) => {
   const title = req.body.title
@@ -36,7 +54,7 @@ app.post('/new', urlencodedParser, (req, res) => {
       id: uuidv4(),
       title
     }
-    todos.push(newpost)
+    newPosts.push(newpost)
     // res.render('index.ejs', {todos}) // 이렇게 하면 안 됩니다!
     // res.redirect(301, '/') // 이렇게 해도 안 됩니다!
     res.redirect('/') // res.redirect는 302 상태코드로 응답합니다.
