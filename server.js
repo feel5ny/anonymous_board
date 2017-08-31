@@ -15,10 +15,10 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false })
 const newPosts = [
   {
     id:uuidv4(),
+    // commentId: uuidv4(),
     num : num,
-    title: ['sample'],
+    title: 'sample',
     comments: [],
-    // newpost: [],
     date: year+'/'+mm+'/'+dd,
     profile : '익명'
   }
@@ -86,16 +86,18 @@ app.post('/newpost', urlencodedParser, (req, res) => {
 })
 
 // 새 댓글 추가 endpoint
-app.post('/comment', urlencodedParser, (req, res) => {
+app.post('/comment/:id', urlencodedParser, (req, res) => {
   const comment = req.body.comment
   const matched = newPosts.find(item => item.id === req.params.id)
+
+  // 해당 viewpost의 코멘트배열을 갖고와야함
   if (matched) {
-    const newcomment = {
-      id: uuidv4(),
-      comments
-    }
-    newPosts.unshift(newcomment)
-    res.redirect('/viewpost/:id')
+    // const newcomment = {
+    //   // commentId: uuidv4(),
+    //   comments: comment
+    // }
+    comments.push(comment)
+    res.redirect('back')
   } else {
     res.status(400)
     res.send('400 Bad Request')

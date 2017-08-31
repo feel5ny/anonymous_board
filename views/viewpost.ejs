@@ -15,18 +15,18 @@
     
     <p><%= viewpost.text %></p>
     <hr>
-     <form action="/comment" method="post">
+     <form action="/comment/<%= viewpost.id %>" method="post">
         <input type="text" name = "comment" placeholder ="여기에 댓글을 입력하면되지롱!" class="commentForm">
         <input type="submit" value="댓글달기" class="commentBtn">
     </form>
 
     <div class="commentBox">
       <div class="commentList ui grid">
-      
-        <div class="thirteen wide column"><%= viewpost.comments %></div>
+      <% viewpost.comments.forEach(a => { %>
+        <div class="thirteen wide column"><%= a %></div>
+      <% }) %>
         <div class="one wide column leftAlign">익명</div>
-        <div class="two wide column leftAlign">2017/09/09</div>
-        
+        <div class="two wide column leftAlign"><%= viewpost.date %></div>
       </div>
     </div>
   </div>
