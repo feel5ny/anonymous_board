@@ -5,9 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="/static/index.css">
-  <title>Document</title>
+  <link rel="stylesheet" href="/static/semantic.css">
+  <title>익명게시판</title>
 </head>
 <body>
-  <h1>hello ejs</h1>
+  <div class="wrapper">
+    <h1>익명게시판</h1>
+    <input type="submit" value="새글 작성하기">
+
+    <table class="ui very basic table">
+      <thead>
+        <tr>
+          <th class="one wide">#</th>
+          <th>제목</th>
+          <th class="one wide">댓글수</th>
+          <th class="two wide">날짜</th>
+          <th class="one wide">작성자</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <% newPosts.filter(t => !t.complete).forEach(newpost => { %>
+          <td><a href="/newpost/<%= newpost.id %>"><%= newpost.title %></a></td>
+          <% }) %>
+          <td>None</td>
+          <td>None</td>
+          <td>None</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script src="/static/semantic.js"></script>
 </body>
 </html>
