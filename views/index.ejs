@@ -27,9 +27,9 @@
       <tbody>
           <% newPosts.forEach(viewpost => { %>
         <tr>
-          <td><%= viewpost.id %></td>
+          <td><%= viewpost.num %></td>
           <td><a href="/viewpost/<%= viewpost.id %>"><%= viewpost.title %></a></td>
-          <td>1</td>
+          <td></td>
           <td><%= viewpost.date %></td>
           <td><%= viewpost.profile %></td>
         </tr>

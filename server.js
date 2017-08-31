@@ -1,19 +1,25 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const uuidv4 = require('uuid/v4')
+let ramdomString = require('randomstring')
 const basicAuth = require('express-basic-auth')
+const today = new Date();
+const dd = today.getDate()
+const mm = today.getMonth()+1
+const year = today.getFullYear()
 
 const app = express()
-let id=1;
+let num=1
+let comments =[]
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 const newPosts = [
   {
-    id:id,
-    // number: id,
-    title: 'sample post',
-    comments: 'sample',
+    id:uuidv4(),
+    num : num,
+    title: ['sample'],
+    comments: [],
     // newpost: [],
-    date: '2017/08/09',
+    date: year+'/'+mm+'/'+dd,
     profile : '익명'
   }
 ]
@@ -36,16 +42,16 @@ app.get('/', (req, res) => {
 })
 
 
-
 // 익명게시판 viewDetail 페이지
 app.get('/viewpost/:id', (req, res) => {
+  // console.log(req.params.id)
   const viewpost = newPosts.find(t => t.id === req.params.id)
-  res.render('viewpost.ejs', {newPosts})
-  // if (viewpost) {
-  // } else {
-  //   res.status(404)
-  //   res.send('404 Not Found')
-  // }
+  if (viewpost) {
+    res.render('viewpost.ejs', {viewpost})
+  } else {
+    res.status(404)
+    res.send('404 Not Found')
+  }
 })
 
 
@@ -55,14 +61,18 @@ app.get('/newpost', (req, res) => {
 })
 
 
+// 글 삭제 페이지
+
 // 새글 추가 endpoint
 app.post('/newpost', urlencodedParser, (req, res) => {
+  // let id
   const title = req.body.title
   const text = req.body.text
   // validation
   if (title, text) {
     const newpost = {
-      id: ++id,
+      id: uuidv4(),
+      num: ++num,
       title,
       text
     }
@@ -78,12 +88,13 @@ app.post('/newpost', urlencodedParser, (req, res) => {
 // 새 댓글 추가 endpoint
 app.post('/comment', urlencodedParser, (req, res) => {
   const comment = req.body.comment
-  if (comment) {
-    // const newcomment = {
-    //   id: uuidv4(),
-    //   comment
-    // }
-    newPosts.unshift(comment)
+  const matched = newPosts.find(item => item.id === req.params.id)
+  if (matched) {
+    const newcomment = {
+      id: uuidv4(),
+      comments
+    }
+    newPosts.unshift(newcomment)
     res.redirect('/viewpost/:id')
   } else {
     res.status(400)
@@ -107,4 +118,3 @@ app.post('/newpost/:id/delete', (req,res)=> {
 app.listen(3000, () => {
   console.log('listening');
 })
-

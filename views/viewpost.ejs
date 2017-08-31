@@ -11,11 +11,9 @@
 <body>
   <div class="wrapper">
     <h1><a href="/">익명게시판</a></h1>
-    <% newPosts.map(viewpost => { %>
     <h2><%= viewpost.title %> </h2>
-    <hr>
+    
     <p><%= viewpost.text %></p>
-    <% }) %>
     <hr>
      <form action="/comment" method="post">
         <input type="text" name = "comment" placeholder ="여기에 댓글을 입력하면되지롱!" class="commentForm">
@@ -24,9 +22,11 @@
 
     <div class="commentBox">
       <div class="commentList ui grid">
-        <div class="thirteen wide column"><%= newPosts[0].comment %></div>
+      
+        <div class="thirteen wide column"><%= viewpost.comments %></div>
         <div class="one wide column leftAlign">익명</div>
         <div class="two wide column leftAlign">2017/09/09</div>
+        
       </div>
     </div>
   </div>
