@@ -1,3 +1,4 @@
+
 const express = require('express')
 const bodyParser = require('body-parser')
 const uuidv4 = require('uuid/v4')
@@ -13,20 +14,22 @@ let id;
 let comments =[]
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 const newPosts = [
-  // {
-  //   id:1,
-  //   title: 'sample1',
-  //   text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod maiores sapiente exercitationem commodi architecto incidunt hic, cupiditate eligendi ipsa corrupti ad quos dolorem assumenda rem labore fugit, quasi eveniet doloremque.',
-  //   date: year+'/'+mm+'/'+dd,
-  //   profile : '익명',
-  // },
-  // { 
-  //   id:2,
-  //   title: 'sample2',
-  //   text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod maiores sapiente exercitationem commodi architecto incidunt hic, cupiditate eligendi ipsa corrupti ad quos dolorem assumenda rem labore fugit, quasi eveniet doloremque.',
-  //   date: year+'/'+mm+'/'+dd,
-  //   profile : '익명'
-  // }
+  
+  {
+    id:1,
+    title: 'sample1',
+    text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod maiores sapiente exercitationem commodi architecto incidunt hic, cupiditate eligendi ipsa corrupti ad quos dolorem assumenda rem labore fugit, quasi eveniet doloremque.',
+    date: year+'/'+mm+'/'+dd,
+    profile : '익명',
+  },
+  { 
+    id:2,
+    title: 'sample2',
+    text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod maiores sapiente exercitationem commodi architecto incidunt hic, cupiditate eligendi ipsa corrupti ad quos dolorem assumenda rem labore fugit, quasi eveniet doloremque.',
+    date: year+'/'+mm+'/'+dd,
+    profile : '익명'
+  }
+  
 ]
 const commentList = [
   {
@@ -87,14 +90,7 @@ app.get('/newpost', (req, res) => {
 
 // 글 삭제 페이지
 app.get('/deletepost', (req, res) => {
-  // const viewpost = newPosts.find(t => t.id === req.params.id)
-  // if (viewpost) {
   res.render('deletepost.ejs', {newPosts,commentList})
-  //   res.render('deletepost.ejs', {viewpost})
-  // } else {
-  //   res.status(404)
-  //   res.send('404 Not Found')
-  // }
 })
 
 
@@ -145,15 +141,10 @@ app.post('/comment/:id', urlencodedParser, (req, res) => {
 app.post('/deletepost', urlencodedParser, (req, res) => {
   const deleteBtn = req.body.delBtn
   const postIndex = newPosts.findIndex(t => t.id*1 === deleteBtn*1)
-  // console.log(postIndex) //해당버튼의 id값을 갖고 잇는 게시물 
-  // console.log(deleteBtn) //
+  console.log(postIndex) //해당버튼의 id값을 갖고 잇는 게시물 
+  console.log(deleteBtn) 
   newPosts.splice(postIndex, 1)
   res.redirect('/deletepost')
-  // if (postIndex !== -1) {
-  // } else {
-  //   res.status(400)
-  //   res.send('400 Bad Reqeust')
-  // }
 })
 
 app.listen(3000, () => {
