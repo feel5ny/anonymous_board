@@ -3,29 +3,54 @@ const bodyParser = require('body-parser')
 const uuidv4 = require('uuid/v4')
 let ramdomString = require('randomstring')
 const basicAuth = require('express-basic-auth')
-const today = new Date();
-const dd = today.getDate()
-const mm = today.getMonth()+1
-const year = today.getFullYear()
+let today = new Date();
+let dd = today.getDate()
+let mm = today.getMonth()+1
+let year = today.getFullYear()
 
 const app = express()
-let num=1
+let id;
 let comments =[]
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 const newPosts = [
   {
-    id:uuidv4(),
-    // commentId: uuidv4(),
-    num : num,
-    title: 'sample',
-    comments: [],
+    id:1,
+    title: 'sample1',
+    text: 'sample',
+    date: year+'/'+mm+'/'+dd,
+    profile : '익명'
+  },
+  { 
+    id:2,
+    title: 'sample2',
+    text: 'sample',
     date: year+'/'+mm+'/'+dd,
     profile : '익명'
   }
 ]
+const commentList = [
+  {
+    id:1,
+    boardId : 1,
+    comment: '댓글1',
+    date: year+'/'+mm+'/'+dd,
+    profile : '익명'
+  },
+  {
+    id:2,
+    boardId : 2,
+    comment: '댓글2',
+    date: year+'/'+mm+'/'+dd,
+    profile : '익명'
+  },
+]
+
 
 app.set('view engine', 'ejs')	
 app.use('/static', express.static('public'))
+
+let newPostSeq = newPosts.length;
+let commentSeq = comments.length;
 
 // 관리자 설정
 app.use(basicAuth({
@@ -38,20 +63,22 @@ app.use(basicAuth({
 
 // 익명게시판 목록 페이지
 app.get('/', (req, res) => {
-  res.render('index.ejs', {newPosts})
+  res.render('index.ejs', {newPosts, commentList})
 })
 
 
 // 익명게시판 viewDetail 페이지
 app.get('/viewpost/:id', (req, res) => {
-  // console.log(req.params.id)
-  const viewpost = newPosts.find(t => t.id === req.params.id)
-  if (viewpost) {
-    res.render('viewpost.ejs', {viewpost})
-  } else {
-    res.status(404)
-    res.send('404 Not Found')
-  }
+  //toString의 유무
+  const viewpost = newPosts.find(t => t.id.toString() === req.params.id)
+  const commentIn = commentList.filter(t => t.id.toString() === req.params.id)
+  // console.log(viewpost)
+  res.render('viewpost.ejs', {viewpost,commentIn})
+  // if (viewpost) {
+  // } else {
+  //   res.status(404)
+  //   res.send('404 Not Found')
+  // }
 })
 
 
@@ -62,22 +89,34 @@ app.get('/newpost', (req, res) => {
 
 
 // 글 삭제 페이지
+app.get('/deletepost', (req, res) => {
+  // const viewpost = newPosts.find(t => t.id === req.params.id)
+  // if (viewpost) {
+  res.render('deletepost.ejs', {newPosts,commentList})
+  //   res.render('deletepost.ejs', {viewpost})
+  // } else {
+  //   res.status(404)
+  //   res.send('404 Not Found')
+  // }
+})
+
 
 // 새글 추가 endpoint
 app.post('/newpost', urlencodedParser, (req, res) => {
-  // let id
   const title = req.body.title
   const text = req.body.text
   // validation
   if (title, text) {
     const newpost = {
-      id: uuidv4(),
-      num: ++num,
+      id: ++newPostSeq,
+      // num: ++num,
       title,
-      text
+      text,
+      date: year+'/'+mm+'/'+dd,
+      profile : '익명'
     }
     newPosts.push(newpost)
-    // id++
+    id++
     res.redirect('/') // res.redirect는 302 상태코드로 응답합니다.
   } else {
     res.status(400)
@@ -88,17 +127,21 @@ app.post('/newpost', urlencodedParser, (req, res) => {
 // 새 댓글 추가 endpoint
 app.post('/comment/:id', urlencodedParser, (req, res) => {
   const comment = req.body.comment
-  const matched = newPosts.find(item => item.id === req.params.id)
+  const matched = newPosts.find(item => item.id.toString() === req.params.id)
+  const commentIn = commentList.filter(item => item.boardId.toString() === req.params.id) 
+  // 해당 게시팡 아이디와, 코멘트가 갖고있는 boardid값을 같게하여 구분하려했으나..
 
-  // 해당 viewpost의 코멘트배열을 갖고와야함
-  if (matched) {
-    // const newcomment = {
-    //   // commentId: uuidv4(),
-    //   comments: comment
-    // }
-    comments.push(comment)
+  if (matched && commentIn) {
+    const newcomment = {
+      boardId: ++newPostSeq,
+      id: ++commentSeq,
+      comment: comment,
+      date: year+'/'+mm+'/'+dd,
+    }
+    commentList.push(newcomment)
     res.redirect('back')
   } else {
+    console.log(commentIn);
     res.status(400)
     res.send('400 Bad Request')
   }
@@ -106,15 +149,15 @@ app.post('/comment/:id', urlencodedParser, (req, res) => {
 
 
 // 글 삭제 endpoint
-app.post('/newpost/:id/delete', (req,res)=> {
-  const postIndex = newPosts.findIndex(t => t.id === req.params.id)
-  if (postIndex !== -1) {
-    newPosts.splice(postIndex, 1)
-    res.redirect('/')
-  } else {
-    res.status(400)
-    res.send('400 Bad Reqeust')
-  }
+app.post('/deletepost', (req,res)=> {
+  const postIndex = newPosts.Indexof(t => t.id.toString() === boardId)
+  postIndex.splice(postIndex, 1)
+  res.redirect('/')
+  // if (postIndex !== -1) {
+  // } else {
+  //   res.status(400)
+  //   res.send('400 Bad Reqeust')
+  // }
 })
 
 app.listen(3000, () => {

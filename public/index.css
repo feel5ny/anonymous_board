@@ -38,16 +38,50 @@ input[type="submit"] {
 .deleteBtn {
   width: 100px;
   background-color: blue;
-  right: 0;
-  position: absolute;
+  /* margin-bottom: 10px; */
+  position: relative;
+  right: 0px;
+  padding-left:10px;
+}
+
+.editBtn {
+  width: 100px;
+  color: blue;
+  border: 1px solid blue;
+  margin-bottom: 10px;
+  position: relative;
+  right: 0px;
+}
+
+.wrapper-btn{
+  display: flex;
+  justify-content: center;
+  /* flex-direction: row-reverse; */
+}
+
+
+
+input[form=form-delete],
+form[id=form-delete],
+form[id=form-edit]{
+  /* display: inline-block; */
+  padding-left: 10px; 
+  cursor: pointer;  
+  /* justify-content: flex-end; */
 }
 
 table{
   padding-top : 30px;
 }
 
+#comment{
+  display: flex;
+  justify-content: space-between;
+}
+
 .commentBtn{
   width : 19%;
+  cursor: pointer;
   background-color: blueviolet;
 }
 
@@ -72,4 +106,19 @@ table{
 .commentBox{
   margin-top: 20px;
   padding: 10px;
+}
+
+.title{
+  display: inline-block;
+  margin:0px;
+}
+
+.deleteList{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 10px 10px 20px;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  margin-bottom: 10px;
 }

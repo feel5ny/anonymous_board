@@ -11,9 +11,12 @@
 <body>
   <div class="wrapper">
     <h1>익명게시판</h1>
-    <a href="/newpost">
-    <input type="submit" value="새글 작성하기" class="newpost"></a>
-
+    <div class="wrapper-btn">
+      <a href="/newpost">
+      <input type="submit" value="새글 작성하기" class="newpost"></a>
+      <a href="/deletepost">
+        <input form="form-delete" type="submit" value="삭제관리" class="deleteBtn"></a>
+    </div>
     <table class="ui very basic table">
       <thead>
         <tr>
@@ -27,7 +30,7 @@
       <tbody>
           <% newPosts.forEach(viewpost => { %>
         <tr>
-          <td><%= viewpost.num %></td>
+          <td><%= viewpost.id %></td>
           <td><a href="/viewpost/<%= viewpost.id %>"><%= viewpost.title %></a></td>
           <td></td>
           <td><%= viewpost.date %></td>
