@@ -18,7 +18,7 @@ const newPosts = [
     title: 'sample1',
     text: 'sample',
     date: year+'/'+mm+'/'+dd,
-    profile : '익명'
+    profile : '익명',
   },
   { 
     id:2,
@@ -31,14 +31,12 @@ const newPosts = [
 const commentList = [
   {
     id:1,
-    boardId : 1,
     comment: '댓글1',
     date: year+'/'+mm+'/'+dd,
     profile : '익명'
   },
   {
     id:2,
-    boardId : 2,
     comment: '댓글2',
     date: year+'/'+mm+'/'+dd,
     profile : '익명'
@@ -50,7 +48,6 @@ app.set('view engine', 'ejs')
 app.use('/static', express.static('public'))
 
 let newPostSeq = newPosts.length;
-let commentSeq = comments.length;
 
 // 관리자 설정
 app.use(basicAuth({
@@ -109,7 +106,6 @@ app.post('/newpost', urlencodedParser, (req, res) => {
   if (title, text) {
     const newpost = {
       id: ++newPostSeq,
-      // num: ++num,
       title,
       text,
       date: year+'/'+mm+'/'+dd,
@@ -128,20 +124,17 @@ app.post('/newpost', urlencodedParser, (req, res) => {
 app.post('/comment/:id', urlencodedParser, (req, res) => {
   const comment = req.body.comment
   const matched = newPosts.find(item => item.id.toString() === req.params.id)
-  const commentIn = commentList.filter(item => item.boardId.toString() === req.params.id) 
-  // 해당 게시팡 아이디와, 코멘트가 갖고있는 boardid값을 같게하여 구분하려했으나..
-
-  if (matched && commentIn) {
+  // let matchedArr = commentList.filter(item => item.id.toString() === req.params.id)
+  
+  if (matched) {
     const newcomment = {
-      boardId: ++newPostSeq,
-      id: ++commentSeq,
+      id: req.params.id*1,
       comment: comment,
       date: year+'/'+mm+'/'+dd,
     }
     commentList.push(newcomment)
     res.redirect('back')
   } else {
-    console.log(commentIn);
     res.status(400)
     res.send('400 Bad Request')
   }
