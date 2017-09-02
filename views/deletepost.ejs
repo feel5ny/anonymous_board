@@ -13,10 +13,11 @@
     <h1><a href="/">익명게시판</a></h1>
     <% newPosts.forEach(viewpost => { %>
     <div class="deleteList">
-      <p class="title"><%= viewpost.num %></p>
+      <p class="title"><%= viewpost.id %></p>
       <p class="title"><%= viewpost.title %></p>
-      <form id="form-delete" action="/deletepost/<% newPosts.id %>" method="post">
-        <input form="form-delete" type="submit" value="삭제하기" class="deleteBtn" name="<% newPosts.id %>">
+      <form id="form-delete" action="/deletepost" method="post">
+        <input form="form-delete" type="submit" value="삭제하기" class="deleteBtn">
+        <input type="hidden" value="<%= viewpost.id %>" class="deleteBtn" name="delBtn">
       </form>
     </div>
     <% }) %>
