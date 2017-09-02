@@ -16,7 +16,7 @@
       <p class="title"><%= viewpost.num %></p>
       <p class="title"><%= viewpost.title %></p>
       <form id="form-delete" action="/deletepost/<% newPosts.id %>" method="post">
-        <input form="form-delete" type="submit" value="삭제하기" class="deleteBtn">
+        <input form="form-delete" type="submit" value="삭제하기" class="deleteBtn" name="<% newPosts.id %>">
       </form>
     </div>
     <% }) %>

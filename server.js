@@ -143,9 +143,11 @@ app.post('/comment/:id', urlencodedParser, (req, res) => {
 
 // 글 삭제 endpoint
 app.post('/deletepost', (req,res)=> {
-  const postIndex = newPosts.Indexof(t => t.id.toString() === boardId)
-  postIndex.splice(postIndex, 1)
-  res.redirect('/')
+  // const deleteBtn = req.body.delBtn
+  const postIndex = newPosts.findIndex(t => t.id*1 === 1)
+  console.log(postIndex)
+  newPosts.splice(postIndex, 1)
+  res.redirect('/deletepost')
   // if (postIndex !== -1) {
   // } else {
   //   res.status(400)
