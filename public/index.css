@@ -21,6 +21,8 @@ h1 {
   align-items: baseline;
   flex-wrap: wrap;
   margin-top: 20px;
+  /* flex-direction: row-reverse;
+  justify-content: flex-end; */
 }
 
 
@@ -29,13 +31,13 @@ input[type="submit"] {
   border: none;
   border-radius: 30px;
   padding: 10px;
-  margin-top:20px;
+  /* margin-top:20px; */
   position: relative;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 .newpost {
+  left: 50%;
+  transform: translateX(-50%);
   width: 200px;
   left: 50%;
   transform: translateX(-50%);
@@ -97,6 +99,9 @@ table{
   width : 19%;
   cursor: pointer;
   background-color: blueviolet;
+  transform: translateX(-50%);
+  left: 50%;
+  margin: 10px;
 }
 
 .commentForm{
@@ -132,7 +137,7 @@ table{
   justify-content: space-between;
   align-items: center;
   padding: 10px 10px 10px 20px;
-  background-color: whitesmoke;
+  background-color: white;
   border-radius: 10px;
   margin-bottom: 10px;
 }

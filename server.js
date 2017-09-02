@@ -13,20 +13,20 @@ let id;
 let comments =[]
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 const newPosts = [
-  {
-    id:1,
-    title: 'sample1',
-    text: 'sample',
-    date: year+'/'+mm+'/'+dd,
-    profile : '익명',
-  },
-  { 
-    id:2,
-    title: 'sample2',
-    text: 'sample',
-    date: year+'/'+mm+'/'+dd,
-    profile : '익명'
-  }
+  // {
+  //   id:1,
+  //   title: 'sample1',
+  //   text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod maiores sapiente exercitationem commodi architecto incidunt hic, cupiditate eligendi ipsa corrupti ad quos dolorem assumenda rem labore fugit, quasi eveniet doloremque.',
+  //   date: year+'/'+mm+'/'+dd,
+  //   profile : '익명',
+  // },
+  // { 
+  //   id:2,
+  //   title: 'sample2',
+  //   text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod maiores sapiente exercitationem commodi architecto incidunt hic, cupiditate eligendi ipsa corrupti ad quos dolorem assumenda rem labore fugit, quasi eveniet doloremque.',
+  //   date: year+'/'+mm+'/'+dd,
+  //   profile : '익명'
+  // }
 ]
 const commentList = [
   {
@@ -112,7 +112,7 @@ app.post('/newpost', urlencodedParser, (req, res) => {
       profile : '익명'
     }
     newPosts.push(newpost)
-    id++
+    // id++
     res.redirect('/') // res.redirect는 302 상태코드로 응답합니다.
   } else {
     res.status(400)

@@ -25410,6 +25410,12 @@ Floated Menu / Item
   font-size: 1.28571429em;
   /* margin-top: -0.21425em; */
   line-height: 1.28571429em;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
 }
 
 .ui.cards > .card > .content > .meta + .description,
