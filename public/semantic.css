@@ -562,7 +562,7 @@ body {
   padding: 0px;
   overflow-x: hidden;
   min-width: 320px;
-  background: #FFFFFF;
+  /* background: #FFFFFF; */
   font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-size: 14px;
   line-height: 1.4285em;
@@ -25247,7 +25247,7 @@ Floated Menu / Item
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  width: 290px;
+  width: 324px;
   min-height: 0px;
   background: #FFFFFF;
   padding: 0em;
@@ -25262,7 +25262,7 @@ Floated Menu / Item
 }
 
 .ui.card {
-  margin: 1em 0em;
+  margin: 0.5em 0em;
 }
 
 .ui.cards > .card a,
@@ -25408,7 +25408,7 @@ Floated Menu / Item
 .ui.card > .content > .header:not(.ui) {
   font-weight: bold;
   font-size: 1.28571429em;
-  margin-top: -0.21425em;
+  /* margin-top: -0.21425em; */
   line-height: 1.28571429em;
 }
 
@@ -25494,6 +25494,12 @@ Floated Menu / Item
 .ui.cards > .card > .content p:last-child,
 .ui.card > .content p:last-child {
   margin-bottom: 0em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
 }
 
 /*--------------
@@ -25730,6 +25736,7 @@ a.ui.card,
 .ui.link.card {
   -webkit-transform: none;
   transform: none;
+  margin-right: 7px;
 }
 
 .ui.cards a.card:hover,

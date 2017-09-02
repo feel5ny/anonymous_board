@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="/static/index.css">
-  <link rel="stylesheet" href="/static/semantic.css">
-  <title>익명게시판</title>
-</head>
-<body>
+<%- include('header') %>
   <div class="wrapper">
     <h1>익명게시판</h1>
     <div class="wrapper-btn">
@@ -17,29 +7,30 @@
       <a href="/deletepost">
         <input form="form-delete" type="submit" value="삭제관리" class="deleteBtn"></a>
     </div>
-    <table class="ui very basic table">
-      <thead>
-        <tr>
-          <th class="one wide">#</th>
-          <th>제목</th>
-          <th class="one wide"></th>
-          <th class="two wide">날짜</th>
-          <th class="one wide">작성자</th>
-        </tr>
-      </thead>  
-      <tbody>
-          <% newPosts.forEach(viewpost => { %>
-        <tr>
-          <td><%= viewpost.id %></td>
-          <td><a href="/viewpost/<%= viewpost.id %>"><%= viewpost.title %></a></td>
-          <td></td>
-          <td><%= viewpost.date %></td>
-          <td><%= viewpost.profile %></td>
-        </tr>
-          <% }) %>
-      </tbody>
-    </table>
+    <div class="wrapperCard">
+      <% newPosts.forEach(viewpost => { %>
+      <a class="ui card" href="/viewpost/<%= viewpost.id %>">
+        <div class="content">
+          <div class="meta">
+          <span class="right floated"><%= viewpost.date %></span>
+            <div class="left"><%= viewpost.id %> /</div> 
+          </div>
+          <div class="header"><%= viewpost.title %></div>
+          
+          
+          <div class="description">
+            <p><%= viewpost.text %></p>
+          </div>
+        </div>
+        <div class="extra content">
+          <div class="right floated author">
+            <img class="ui avatar image" src="/static/nan.jpg"><%= viewpost.profile %>
+          </div>
+        </div>
+      </a>
+      <% }) %>
+    
+    </div>
+    
   </div>
-  <script src="/static/semantic.js"></script>
-</body>
-</html>
+<%- include('footer') %>

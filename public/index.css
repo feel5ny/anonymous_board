@@ -1,5 +1,5 @@
 body {
-  background-color: lightcoral;
+  background-color: whitesmoke;
 }
 
 a{
@@ -10,10 +10,17 @@ h1 {
   margin-bottom: 50px;
   margin-top : 100px;  
 }
+
 .wrapper{
   width : 70%;
   position : relative;
   margin : 0 auto;
+}
+.wrapperCard{
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  margin-top: 20px;
 }
 
 
@@ -22,6 +29,10 @@ input[type="submit"] {
   border: none;
   border-radius: 30px;
   padding: 10px;
+  margin-top:20px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .newpost {
@@ -59,6 +70,9 @@ input[type="submit"] {
   /* flex-direction: row-reverse; */
 }
 
+a[href="/deletepost"]{
+  padding-left:10px;
+}
 
 
 input[form=form-delete],

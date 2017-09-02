@@ -13,12 +13,10 @@
   <div class="wrapper">
     <h1><a href="/">익명게시판</a></h1>
     <form action="/newpost" class="ui form" method="post">
-      <input required type="text" name="title">
+      <input required type="text" name="title" placeholder="제목을 입력하세요">
       <div class="field"></div>
-      <textarea required name="text"></textarea>
+      <textarea required name="text" rows="25" placeholder="내용을 입력하세요"></textarea>
       <input type="submit" value="등록하기" class="commentBtn">
     </form>
   </div>
-  <script src="/static/semantic.js"></script>
-</body>
-</html>
+<%- include('footer') %>

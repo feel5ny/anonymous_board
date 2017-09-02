@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="/static/index.css">
-  <link rel="stylesheet" href="/static/semantic.css">
-  <title>익명게시판</title>
-</head>
-<body>
+<%- include('header') %>
   <div class="wrapper">
     <h1><a href="/">익명게시판</a></h1>
     <% newPosts.forEach(viewpost => { %>
@@ -17,11 +7,9 @@
       <p class="title"><%= viewpost.title %></p>
       <form id="form-delete" action="/deletepost" method="post">
         <input form="form-delete" type="submit" value="삭제하기" class="deleteBtn">
-        <input type="hidden" value="<%= viewpost.id %>" class="deleteBtn" name="delBtn">
+        <input type="hidden" value="<%= viewpost.id %>" name="delBtn">
       </form>
     </div>
     <% }) %>
   </div>
-  <script src="/static/semantic.js"></script>
-</body>
-</html>
+<%- include('footer') %>
