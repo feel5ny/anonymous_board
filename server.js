@@ -163,11 +163,8 @@ app.post('/comment/:id', urlencodedParser, (req, res) => {
 
 
 // 글 삭제 endpoint
-app.post('/deletepost',authMiddleware, urlencodedParser, (req, res) => {
-  const deleteBtn = req.body.delBtn
-  const postIndex = newPosts.findIndex(t => t.id*1 === deleteBtn*1)
-  console.log(postIndex) //해당버튼의 id값을 갖고 잇는 게시물 
-  console.log(deleteBtn) 
+app.post('/deletepost/:id',authMiddleware, urlencodedParser, (req, res) => {
+  const postIndex = newPosts.findIndex(t => t.id === req.params.id)
   newPosts.splice(postIndex, 1)
   res.redirect('/deletepost')
 })

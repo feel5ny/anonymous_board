@@ -5,9 +5,8 @@
     <div class="deleteList">
       <p class="title"><%= viewpost.id %></p>
       <p class="title"><%= viewpost.title %></p>
-      <form id="form-delete" action="/deletepost" method="post">
+      <form id="form-delete" action="/deletepost/<%= viewpost.id %>" method="post">
         <input form="form-delete" type="submit" value="삭제하기" class="deleteBtn">
-        <input type="hidden" value="<%= viewpost.id %>" name="delBtn">
       </form>
     </div>
     <% }) %>
