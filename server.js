@@ -124,7 +124,7 @@ app.post('/newpost', urlencodedParser, (req, res) => {
   const title = req.body.title // 요청 바디를 적절한 형태의 자바스크립트 객체로 변환하여 이곳에 저장. (body-parser 미들웨어에 의해 처리됨)
   const text = req.body.text
   // validation
-  if (title, text) {
+  if (title && text) {
     const newpost = {
       id: ++newPostSeq,
       title,
