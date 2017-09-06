@@ -3,11 +3,6 @@ const express = require('express') // 기본 구조 셋팅.
 const bodyParser = require('body-parser')
 let ramdomString = require('randomstring')
 const basicAuth = require('express-basic-auth')
-let today = new Date();
-let dd = today.getDate()
-let mm = today.getMonth()+1
-let year = today.getFullYear()
-
 const app = express() 
 // Express 인스턴스 생성
 // app 객체는 express()메소드 호출로 만들어지는 익스프레스 서버 객체이다.
@@ -123,6 +118,10 @@ app.get('/deletepost',authMiddleware, (req, res) => {
 app.post('/newpost', urlencodedParser, (req, res) => {
   const title = req.body.title // 요청 바디를 적절한 형태의 자바스크립트 객체로 변환하여 이곳에 저장. (body-parser 미들웨어에 의해 처리됨)
   const text = req.body.text
+  let today = new Date();
+  let dd = today.getDate()
+  let mm = today.getMonth()+1
+  let year = today.getFullYear()
   // validation
   if (title && text) {
     const newpost = {
@@ -146,7 +145,10 @@ app.post('/comment/:id', urlencodedParser, (req, res) => {
   const comment = req.body.comment
   const matched = newPosts.find(item => item.id.toString() === req.params.id)
   // req.params : route parameter
-  
+  let today = new Date();
+  let dd = today.getDate()
+  let mm = today.getMonth()+1
+  let year = today.getFullYear()
   if (matched) {
     const newcomment = {
       id: req.params.id*1,
