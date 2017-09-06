@@ -21,49 +21,49 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 const newPosts = [
   
-  {
-    id:1,
-    title: 'sample1',
-    text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod maiores sapiente exercitationem commodi architecto incidunt hic, cupiditate eligendi ipsa corrupti ad quos dolorem assumenda rem labore fugit, quasi eveniet doloremque.',
-    date: year+'/'+mm+'/'+dd,
-    profile : '익명',
-  },
-  { 
-    id:2,
-    title: 'sample2',
-    text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod maiores sapiente exercitationem commodi architecto incidunt hic, cupiditate eligendi ipsa corrupti ad quos dolorem assumenda rem labore fugit, quasi eveniet doloremque.',
-    date: year+'/'+mm+'/'+dd,
-    profile : '익명'
-  },
-  {
-    id:3,
-    title: 'sample3',
-    text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod maiores sapiente exercitationem commodi architecto incidunt hic, cupiditate eligendi ipsa corrupti ad quos dolorem assumenda rem labore fugit, quasi eveniet doloremque.',
-    date: year+'/'+mm+'/'+dd,
-    profile : '익명',
-  },
-  {
-    id:4,
-    title: 'sample4',
-    text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod maiores sapiente exercitationem commodi architecto incidunt hic, cupiditate eligendi ipsa corrupti ad quos dolorem assumenda rem labore fugit, quasi eveniet doloremque.',
-    date: year+'/'+mm+'/'+dd,
-    profile : '익명',
-  },
+  // {
+  //   id:1,
+  //   title: 'sample1',
+  //   text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod maiores sapiente exercitationem commodi architecto incidunt hic, cupiditate eligendi ipsa corrupti ad quos dolorem assumenda rem labore fugit, quasi eveniet doloremque.',
+  //   date: year+'/'+mm+'/'+dd,
+  //   profile : '익명',
+  // },
+  // { 
+  //   id:2,
+  //   title: 'sample2',
+  //   text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod maiores sapiente exercitationem commodi architecto incidunt hic, cupiditate eligendi ipsa corrupti ad quos dolorem assumenda rem labore fugit, quasi eveniet doloremque.',
+  //   date: year+'/'+mm+'/'+dd,
+  //   profile : '익명'
+  // },
+  // {
+  //   id:3,
+  //   title: 'sample3',
+  //   text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod maiores sapiente exercitationem commodi architecto incidunt hic, cupiditate eligendi ipsa corrupti ad quos dolorem assumenda rem labore fugit, quasi eveniet doloremque.',
+  //   date: year+'/'+mm+'/'+dd,
+  //   profile : '익명',
+  // },
+  // {
+  //   id:4,
+  //   title: 'sample4',
+  //   text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod maiores sapiente exercitationem commodi architecto incidunt hic, cupiditate eligendi ipsa corrupti ad quos dolorem assumenda rem labore fugit, quasi eveniet doloremque.',
+  //   date: year+'/'+mm+'/'+dd,
+  //   profile : '익명',
+  // },
   
 ]
 const commentList = [
-  {
-    id:1,
-    comment: '댓글1',
-    date: year+'/'+mm+'/'+dd,
-    profile : '익명'
-  },
-  {
-    id:2,
-    comment: '댓글2',
-    date: year+'/'+mm+'/'+dd,
-    profile : '익명'
-  },
+  // {
+  //   id:1,
+  //   comment: '댓글1',
+  //   date: year+'/'+mm+'/'+dd,
+  //   profile : '익명'
+  // },
+  // {
+  //   id:2,
+  //   comment: '댓글2',
+  //   date: year+'/'+mm+'/'+dd,
+  //   profile : '익명'
+  // },
 ]
 
 
@@ -132,7 +132,7 @@ app.post('/newpost', urlencodedParser, (req, res) => {
       date: year+'/'+mm+'/'+dd,
       profile : '익명'
     }
-    newPosts.push(newpost)
+    newPosts.unshift(newpost)
     // id++
     res.redirect('/') // res.redirect는 302 상태코드로 응답합니다.
   } else {
@@ -153,7 +153,7 @@ app.post('/comment/:id', urlencodedParser, (req, res) => {
       comment: comment,
       date: year+'/'+mm+'/'+dd,
     }
-    commentList.push(newcomment)
+    commentList.unshift(newcomment)
     res.redirect('back')
   } else {
     res.status(400)             // 응답의 상태 코드를 지정하는 메소드
@@ -170,6 +170,6 @@ app.post('/deletepost/:id',authMiddleware, urlencodedParser, (req, res) => {
 })
 
 // 서버구동
-app.listen(3000, () => {
+app.listen(3001, () => {
   console.log('listening');
 })
